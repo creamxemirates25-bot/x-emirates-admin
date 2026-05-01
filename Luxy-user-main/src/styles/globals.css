@@ -22,17 +22,18 @@
 
 @layer base {
   :root {
-    --background: 37 60% 95%;
-    --foreground: 21 38% 21%;
-    --card: 37 60% 95%;
-    --card-foreground: 21 38% 21%;
-    --popover: 37 60% 95%;
-    --popover-foreground: 21 38% 21%;
-    /* primary = #4b3121 → hsl(21, 38%, 21%) */
-    --primary: 21 38% 21%;
+    --background: 40 45% 91%;
+    --foreground: 22 39% 21%;
+    --card: 40 45% 91%;
+    --card-foreground: 22 39% 21%;
+    --popover: 40 45% 91%;
+    --popover-foreground: 22 39% 21%;
+    /* primary = Reddish brown */
+    --primary: 9 55% 35%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 37 85% 95%;
-    --secondary-foreground: 21 38% 21%;
+    /* secondary = Olive green */
+    --secondary: 65 30% 29%;
+    --secondary-foreground: 0 0% 100%;
     --muted: 37 30% 90%;
     --muted-foreground: 21 20% 45%;
     --accent: 37 85% 95%;
