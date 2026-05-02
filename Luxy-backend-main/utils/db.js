@@ -7,7 +7,10 @@ const { database } = keys;
 
 const setupDB = async () => {
   try {
-    await mongoose.connect(database.url);
+    await mongoose.connect(database.url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log(`${chalk.green('✓')} ${chalk.blue('MongoDB Connected!')}`);
   } catch (error) {
     console.log(error);

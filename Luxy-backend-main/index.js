@@ -21,14 +21,18 @@ app.use(
 );
 app.use(cors());
 
-setupDB();
-require('./config/passport')(app);
-app.use(routes);
+const startServer = async () => {
+  await setupDB();
+  await require('./config/passport')(app);
+  app.use(routes);
 
-const server = app.listen(port, () => {
-  console.log(
-    `${chalk.green('✓')} ${chalk.blue(
-      `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`
-    )}`
-  );
-});
+  app.listen(port, '127.0.0.1', () => {
+    console.log(
+      `${chalk.green('✓')} ${chalk.blue(
+        `Listening on port ${port}. Visit http://127.0.0.1:${port}/ in your browser.`
+      )}`
+    );
+  });
+};
+
+startServer();

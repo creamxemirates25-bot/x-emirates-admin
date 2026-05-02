@@ -112,7 +112,7 @@ export default function HeroBanner() {
           }
         }
       } catch (err) {
-        console.error("Failed to fetch banners, using fallback:", err);
+        console.error("HeroBanner: Failed to fetch banners from API.", err);
       }
       bannerCache = fallbackSlides;
       setSlides(fallbackSlides);

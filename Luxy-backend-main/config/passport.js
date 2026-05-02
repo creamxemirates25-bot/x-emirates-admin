@@ -46,6 +46,10 @@ module.exports = async app => {
 
 const googleAuth = async () => {
   try {
+    if (!google || !google.clientID) {
+      console.log('Google keys missing, skipping Google Strategy');
+      return;
+    }
     passport.use(
       new GoogleStrategy(
         {
@@ -87,12 +91,16 @@ const googleAuth = async () => {
       )
     );
   } catch (error) {
-    console.log('Missing google keys');
+    console.log('Error initializing Google Strategy:', error.message);
   }
 };
 
 const facebookAuth = async () => {
   try {
+    if (!facebook || !facebook.clientID) {
+      console.log('Facebook keys missing, skipping Facebook Strategy');
+      return;
+    }
     passport.use(
       new FacebookStrategy(
         {
@@ -139,6 +147,6 @@ const facebookAuth = async () => {
       )
     );
   } catch (error) {
-    console.log('Missing facebook keys');
+    console.log('Error initializing Facebook Strategy:', error.message);
   }
 };
