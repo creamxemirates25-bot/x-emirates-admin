@@ -18,25 +18,15 @@ const ProductCard = ({ data, priority = false, isCircle = false }: ProductCardPr
       <div
         className={
           isCircle
-            ? "relative bg-[#f5ede4] rounded-full w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] lg:w-[260px] lg:h-[260px] xl:w-[295px] xl:h-[295px] mx-auto mb-3 overflow-hidden"
-            : "relative bg-[#f5ede4] rounded-[13px] lg:rounded-[20px] w-full lg:max-w-[295px] aspect-square mb-2.5 xl:mb-4 overflow-hidden"
+            ? "relative bg-brand-light rounded-[40px] w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] md:w-[240px] md:h-[240px] lg:w-[280px] lg:h-[280px] xl:w-[320px] xl:h-[320px] mx-auto mb-4 overflow-hidden border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500"
+            : "relative bg-brand-light rounded-[20px] w-full aspect-square mb-2.5 xl:mb-4 overflow-hidden border border-black/5"
         }
       >
-        {/* <Image
-          src={data.srcUrl}
-          fill
-          sizes="(max-width: 768px) 50vw, 295px"
-          className={`${isCircle ? "object-cover" : "object-contain rounded-md"} hover:scale-110 transition-all duration-500`}
-          alt={data.title}
-          priority={priority}
-          loading={priority ? "eager" : "lazy"}
-        /> */}
         <Image
           src={data.srcUrl}
           fill
-          sizes="(max-width: 768px) 50vw, 295px"
-          className={`${isCircle ? "object-cover" : "object-contain"
-            } hover:scale-110 transition-all duration-500`}
+          sizes="(max-width: 768px) 50vw, 320px"
+          className="object-cover hover:scale-110 transition-all duration-700 ease-out"
           alt={data.title}
           priority={priority}
         />

@@ -7,7 +7,7 @@ import HolyLoader from "holy-loader";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "X Emirates",
+  title: "Cream X Emirates",
   description: "Grace in every taste",
 };
 

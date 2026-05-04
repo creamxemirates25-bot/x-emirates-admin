@@ -19,11 +19,11 @@ type BannerSlide = {
 const fallbackSlides: BannerSlide[] = [
   {
     _id: "1",
-    desktopImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=90",
-    mobileImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=90",
-    tag: "New Arrivals",
-    headline: "Dress for\nthe Moment",
-    subheadline: "Curated pieces for every occasion — minimal, intentional, yours.",
+    desktopImage: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=1600&q=90",
+    mobileImage: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=90",
+    tag: "Luxury Abayas",
+    headline: "Elegance\nRedefined",
+    subheadline: "Discover our exclusive collection of premium abayas, designed for the modern woman.",
     cta: "Shop Collection",
     ctaSecondary: "Explore Lookbook",
     align: "left",
@@ -31,24 +31,24 @@ const fallbackSlides: BannerSlide[] = [
   },
   {
     _id: "2",
-    desktopImage: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1600&q=90",
-    mobileImage: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=90",
-    tag: "Limited Edition",
-    headline: "Summer\nEssentials",
-    subheadline: "Lightweight fabrics. Bold silhouettes. Made to move with you.",
+    desktopImage: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=1600&q=90",
+    mobileImage: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&q=90",
+    tag: "Signature Scents",
+    headline: "Luxury\nPerfumes",
+    subheadline: "Captivating fragrances crafted from the finest ingredients to leave a lasting impression.",
     cta: "View All",
-    ctaSecondary: "Find Your Size",
+    ctaSecondary: "Find Your Scent",
     align: "center",
     isActive: true,
   },
   {
     _id: "3",
-    desktopImage: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1600&q=90",
-    mobileImage: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=90",
-    tag: "Sale — Up to 40% Off",
-    headline: "Classic\nRedefined",
-    subheadline: "Timeless staples reimagined for the modern wardrobe.",
-    cta: "Shop Sale",
+    desktopImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=1600&q=90",
+    mobileImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&q=90",
+    tag: "Exclusive Accessories",
+    headline: "Timeless\nDetails",
+    subheadline: "Elevate your style with our handcrafted premium bags and accessories.",
+    cta: "Shop Accessories",
     align: "right",
     isActive: true,
   },
@@ -156,7 +156,7 @@ export default function HeroBanner() {
           height: 92vh;
           min-height: 560px;
           max-height: 900px;
-          background: #fdf2f8;
+          background: var(--brand-light);
           overflow: hidden;
           cursor: default;
         }
@@ -247,8 +247,8 @@ export default function HeroBanner() {
           font-weight: 500;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: #db2777;
-          border: 1px solid #db2777;
+          color: var(--brand);
+          border: 1.5px solid var(--brand);
           padding: 5px 14px;
           margin-bottom: 22px;
           opacity: 0;
@@ -263,7 +263,7 @@ export default function HeroBanner() {
           font-weight: 300;
           line-height: 1.05;
           letter-spacing: -0.01em;
-          color: #db2777;
+          color: #1a1a1a;
           white-space: pre-line;
           margin: 0 0 20px;
           opacity: 0;
@@ -276,7 +276,7 @@ export default function HeroBanner() {
           font-size: 0.95rem;
           font-weight: 300;
           line-height: 1.65;
-          color: #db2777;
+          color: #444;
           max-width: 400px;
           margin-bottom: 36px;
           opacity: 0;
@@ -297,7 +297,7 @@ export default function HeroBanner() {
         .banner-content.center .btn-row { justify-content: center; }
 
         .btn-primary {
-          background: #db2777;
+          background: var(--brand);
           color: #fff;
           font-family: 'Montserrat', sans-serif;
           font-size: 0.8rem;
@@ -309,22 +309,22 @@ export default function HeroBanner() {
           cursor: pointer;
           transition: background 0.25s, transform 0.2s;
         }
-        .btn-primary:hover { background: #be185d; transform: translateY(-2px); }
+        .btn-primary:hover { background: var(--brand-dark); transform: translateY(-2px); }
 
         .btn-ghost {
           background: transparent;
-          color: #db2777;
+          color: var(--brand);
           font-family: 'Montserrat', sans-serif;
           font-size: 0.8rem;
           font-weight: 500;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           padding: 14px 34px;
-          border: 1px solid #db2777;
+          border: 1.5px solid var(--brand);
           cursor: pointer;
           transition: background 0.25s, color 0.25s, transform 0.2s;
         }
-        .btn-ghost:hover { background: #db2777; color: #fff; transform: translateY(-2px); }
+        .btn-ghost:hover { background: var(--brand); color: #fff; transform: translateY(-2px); }
 
         /* ── progress bar ── */
         .progress-bar {
@@ -377,14 +377,14 @@ export default function HeroBanner() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          border: 1px solid #db2777;
+          border: 1px solid var(--brand);
           background: transparent;
           cursor: pointer;
           padding: 0;
           transition: background 0.25s, transform 0.2s;
         }
         .dot.active {
-          background: #db2777;
+          background: var(--brand);
           transform: scale(1.3);
         }
 
@@ -398,7 +398,7 @@ export default function HeroBanner() {
           letter-spacing: 0.12em;
           color: #c49070;
         }
-        .slide-counter span { color: #db2777; font-weight: 500; }
+        .slide-counter span { color: var(--brand); font-weight: 500; }
 
         @keyframes fadeUp {
           to { opacity: 1; transform: translateY(0); }

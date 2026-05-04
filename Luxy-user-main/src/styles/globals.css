@@ -5,13 +5,14 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 170, 107, 56;
+  --foreground-rgb: 26, 26, 26;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
-  /* Brand colors */
-  --brand: #db2777;
-  --brand-dark: #be185d;
-  --brand-light: #fdf2f8;
+  /* Brand colors - Refined Luxury Theme */
+  --brand: #be185d; /* Elegant Deep Rose */
+  --brand-dark: #9d174d;
+  --brand-light: #fffdf5; /* Rich Luxury Cream */
+  --brand-accent: #fce7f3; /* Soft Rose */
 }
 
 @layer utilities {

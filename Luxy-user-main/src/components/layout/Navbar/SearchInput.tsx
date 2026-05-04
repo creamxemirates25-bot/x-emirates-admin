@@ -110,7 +110,7 @@ const SearchInput = () => {
             type="search"
             name="search"
             placeholder="Search for products..."
-            className="bg-transparent placeholder:text-brand/40"
+            className="bg-transparent placeholder:text-black/30 text-black/80"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => query && suggestions.length > 0 && setShowSuggestions(true)}
@@ -161,7 +161,7 @@ const SearchInput = () => {
               </button>
             </div>
           ) : (
-            <div className="p-4 text-center text-brand/60 text-sm">No products found</div>
+            <div className="p-4 text-center text-black/50 text-sm">No products found</div>
           )}
         </div>
       )}

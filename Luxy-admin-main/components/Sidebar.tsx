@@ -1,5 +1,6 @@
 "use client";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -348,10 +349,14 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
       {/* Sidebar */}
       <aside className={`sidebar${isSidebarOpen ? " open" : ""}`} role="navigation">
         {/* Logo Section */}
-        <div className="sidebar-header">
-          <h1 className="sidebar-logo">
-            X EMIRATES<span className="sidebar-logo-accent">ADMIN</span>
-          </h1>
+        <div className="sidebar-header" style={{ textAlign: 'center' }}>
+          <Image
+            src="/images/logo-white.svg"
+            alt="Cream X Emirates Admin"
+            width={160}
+            height={160}
+            style={{ margin: '0 auto', display: 'block' }}
+          />
           <p className="sidebar-subtext">CONTROL PANEL</p>
         </div>
 

@@ -9,21 +9,18 @@ import Image from "next/image";
 const TopNavbar = () => {
   return (
     <nav className="sticky top-0 bg-background z-20 shadow-sm border-b border-brand/5">
-      <div className="flex relative max-w-frame mx-auto items-center justify-between md:justify-start py-2 md:py-3 px-4 xl:px-0">
+      <div className="flex relative max-w-frame mx-auto items-center justify-between md:justify-start py-1 md:py-2 px-4 xl:px-0">
         <div className="flex items-center">
           <Link
             href="/"
-            className={cn([
-              integralCF.className,
-              "text-2xl lg:text-[32px] mr-3 lg:mr-10 text-brand",
-            ])}
+            className="flex items-center mr-3 lg:mr-10"
           >
           <Image
-            src="/images/x-emirates-logo.svg"
-            alt="X Emirates Logo"
-            width={90}
-            height={90}
-            className="rounded-full object-cover"
+            src="/images/logo.svg"
+            alt="Cream X Emirates Logo"
+            width={160}
+            height={160}
+            className="object-contain h-14 md:h-20 w-auto"
           />
           </Link>
         </div>

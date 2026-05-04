@@ -63,27 +63,27 @@ export default function CategoryCarousel() {
           <div className="flex gap-4 overflow-hidden">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="flex flex-col items-center gap-3 animate-pulse shrink-0">
-                <div className="w-[160px] h-[160px] rounded-full bg-brand/10" />
-                <div className="h-4 w-24 bg-brand/10 rounded" />
+                <div className="w-[160px] h-[160px] md:w-[220px] md:h-[220px] rounded-3xl bg-brand/5" />
+                <div className="h-4 w-24 bg-brand/5 rounded" />
               </div>
             ))}
           </div>
         ) : (
           <Carousel opts={{ align: "start" }} className="w-full mb-6 md:mb-9">
-            <CarouselContent className="mx-4 xl:mx-0 space-x-6">
+            <CarouselContent className="mx-4 xl:mx-0 space-x-6 lg:space-x-8">
               {categories.map(cat => (
                 <CarouselItem key={cat._id} className="pl-0 basis-auto">
                   <Link
                     href={`/shop?categories=${encodeURIComponent(cat.name)}`}
-                    className="flex flex-col items-center gap-3 group"
+                    className="flex flex-col items-center gap-4 group"
                   >
-                    <div className="relative w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] rounded-full overflow-hidden bg-[#f5ede4] border-2 border-transparent group-hover:border-brand transition-all duration-300 shrink-0">
+                    <div className="relative w-[150px] h-[150px] sm:w-[220px] sm:h-[220px] rounded-[40px] overflow-hidden bg-brand-light border border-black/5 shadow-sm group-hover:shadow-2xl group-hover:shadow-brand/20 transition-all duration-500 shrink-0">
                       {cat.image ? (
                         <Image
                           src={cat.image}
                           alt={cat.name}
                           fill
-                          className="object-cover group-hover:scale-110 transition-all duration-500"
+                          className="object-cover scale-100 group-hover:scale-110 transition-all duration-700 ease-out"
                           unoptimized
                         />
                       ) : (
@@ -91,8 +91,10 @@ export default function CategoryCarousel() {
                           🛍️
                         </div>
                       )}
+                      {/* Premium Overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                     </div>
-                    <span className="text-sm sm:text-base font-medium text-brand group-hover:text-brand-dark transition-colors">
+                    <span className="text-sm sm:text-lg font-bold text-black/80 group-hover:text-brand transition-all duration-300 uppercase tracking-wider">
                       {cat.name}
                     </span>
                   </Link>
