@@ -34,9 +34,9 @@ const config: Config = {
       },
       colors: {
         brand: {
-          DEFAULT: "#4b3121",
-          dark: "#321f14",
-          light: "#fdf5e6",
+          DEFAULT: "#db2777",
+          dark: "#be185d",
+          light: "#fdf2f8",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

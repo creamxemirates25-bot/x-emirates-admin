@@ -29,12 +29,12 @@ const Footer = () => {
                   "text-[28px] lg:text-[32px] mb-6 text-brand",
                 ])}
               >
-                Gracio ORGANIC
+                X EMIRATES
               </h1>
               <p className="text-brand/80 text-sm mb-9">
-                At Gracio Organic, we bring the finest, organically grown
-                spices, herbs and wellness products from nature to your
-                table. Purest flavors and nutrients, just as nature intended.
+                At X Emirates, we bring the finest luxury and wellness products
+                from nature to your table. Experience the purest flavors and
+                premium quality, just as nature intended.
               </p>
               <div className="flex items-center">
                 {socialsData.map((social) => (
@@ -58,7 +58,7 @@ const Footer = () => {
           <hr className="h-[1px] border-t-brand/20 mb-6" />
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-brand/60 text-xs md:text-sm">
-              Gracio Organic © 2024-2025. All Rights Reserved.
+              X Emirates © 2024-2025. All Rights Reserved.
             </p>
             <p className="text-brand/80 font-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">
               Grace in every taste

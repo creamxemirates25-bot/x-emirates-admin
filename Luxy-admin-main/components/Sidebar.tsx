@@ -152,7 +152,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
         }
 
         .sidebar-logo-accent {
-          color: #d4af37;
+          color: var(--brand);
         }
 
         .sidebar-subtext {
@@ -201,18 +201,18 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
         .nav-item:hover {
           color: #c4c4e0;
           background: #1a1a26;
-          border-left-color: #4b3121;
+          border-left-color: var(--brand);
         }
 
         .nav-item.active {
-          color: #d4af37;
-          background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
-          border-left-color: #d4af37;
+          color: var(--brand);
+          background: linear-gradient(90deg, rgba(219, 39, 119, 0.1) 0%, transparent 100%);
+          border-left-color: var(--brand);
           font-weight: 600;
         }
 
         .nav-item.active svg {
-          color: #d4af37;
+          color: var(--brand);
         }
 
         .nav-item svg {
@@ -239,7 +239,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #4b3121, #d4af37);
+          background: linear-gradient(135deg, var(--brand), var(--brand-dark));
           display: flex;
           align-items: center;
           justify-content: center;
@@ -350,7 +350,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
         {/* Logo Section */}
         <div className="sidebar-header">
           <h1 className="sidebar-logo">
-            GRACIO<span className="sidebar-logo-accent">ADMIN</span>
+            X EMIRATES<span className="sidebar-logo-accent">ADMIN</span>
           </h1>
           <p className="sidebar-subtext">CONTROL PANEL</p>
         </div>

@@ -31,16 +31,15 @@ const ProductCard = ({ data, priority = false, isCircle = false }: ProductCardPr
           priority={priority}
           loading={priority ? "eager" : "lazy"}
         /> */}
-         <Image
-    src={data.srcUrl}
-    fill
-    sizes="(max-width: 768px) 50vw, 295px"
-    className={`${
-      isCircle ? "object-cover" : "object-contain"
-    } hover:scale-110 transition-all duration-500`}
-    alt={data.title}
-    priority={priority}
-  />
+        <Image
+          src={data.srcUrl}
+          fill
+          sizes="(max-width: 768px) 50vw, 295px"
+          className={`${isCircle ? "object-cover" : "object-contain"
+            } hover:scale-110 transition-all duration-500`}
+          alt={data.title}
+          priority={priority}
+        />
       </div>
       <strong className="text-brand xl:text-xl">{data.title}</strong>
       <p className="text-brand/60 text-sm xl:text-base">{data.category}</p>

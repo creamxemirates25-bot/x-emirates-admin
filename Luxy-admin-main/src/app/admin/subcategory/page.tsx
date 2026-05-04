@@ -43,15 +43,15 @@ export default function Subcategories() {
       const authToken = localStorage.getItem("token") || "";
       const res = editId
         ? await fetch(`${api}/subcategory/${editId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json", Authorization: authToken },
-            body: JSON.stringify({ name }),
-          })
+          method: "PUT",
+          headers: { "Content-Type": "application/json", Authorization: authToken },
+          body: JSON.stringify({ name }),
+        })
         : await fetch(`${api}/subcategory/add`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", Authorization: authToken },
-            body: JSON.stringify({ name }),
-          });
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: authToken },
+          body: JSON.stringify({ name }),
+        });
 
       if (!res.ok) return alert(`Error: ${await res.text()}`);
       const data = await res.json();

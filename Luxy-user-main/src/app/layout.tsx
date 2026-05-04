@@ -7,12 +7,12 @@ import HolyLoader from "holy-loader";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Gracio ORGANIC",
+  title: "X Emirates",
   description: "Grace in every taste",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#4b3121",
+  themeColor: "#db2777",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${integralCF.variable} font-sans flex flex-col min-h-screen`}>
-        <HolyLoader color="#4b3121" />
+        <HolyLoader color="#db2777" />
         <Providers>
           {/* Navbar */}
           <TopNavbar />

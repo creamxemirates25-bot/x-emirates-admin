@@ -101,7 +101,7 @@ const SearchInput = () => {
   return (
     <div className="relative w-full md:mr-3 lg:mr-10">
       <form onSubmit={handleSearch}>
-        <InputGroup className="flex bg-[#fdf5e6]">
+        <InputGroup className="flex bg-brand-light">
           <InputGroup.Text>
             <Image priority src="/icons/search.svg" height={20} width={20} alt="search" className="min-w-5 min-h-5" />
           </InputGroup.Text>
@@ -141,9 +141,9 @@ const SearchInput = () => {
                 <button
                   key={p.id}
                   onClick={() => handleSuggestionClick(p.id, p.title)}
-                  className="w-full flex items-center gap-3 p-3 hover:bg-[#fdf5e6] transition-colors text-left"
+                  className="w-full flex items-center gap-3 p-3 hover:bg-brand-light transition-colors text-left"
                 >
-                  <div className="relative w-12 h-12 flex-shrink-0 rounded bg-[#fdf5e6] overflow-hidden">
+                  <div className="relative w-12 h-12 flex-shrink-0 rounded bg-brand-light overflow-hidden">
                     <Image src={p.srcUrl} alt={p.title} fill className="object-cover" unoptimized />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -155,7 +155,7 @@ const SearchInput = () => {
               ))}
               <button
                 onClick={() => { router.push(`/shop?search=${encodeURIComponent(query)}`); setShowSuggestions(false); }}
-                className="w-full p-3 text-center text-sm font-medium text-brand hover:bg-[#fdf5e6] transition-colors"
+                className="w-full p-3 text-center text-sm font-medium text-brand hover:bg-brand-light transition-colors"
               >
                 View all results for "{query}"
               </button>

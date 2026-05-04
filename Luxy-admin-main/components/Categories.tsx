@@ -7,18 +7,18 @@ type Category = { _id: string; name: string; image?: string };
 const CSS = `
   .card { background: #13131a; border: 1px solid #1e1e2e; border-radius: 12px; transition: border-color 0.18s; }
   .card:hover { border-color: #2a2a40; }
-  .btn-primary { background: #4b3121; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
-  .btn-primary:hover:not(:disabled) { background: #321f14; }
+  .btn-primary { background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .btn-primary:hover:not(:disabled) { background: var(--brand-dark); }
   .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
   .btn-ghost { background: transparent; color: #555570; border: 1px solid #1e1e2e; border-radius: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer; transition: all 0.15s; }
   .btn-ghost:hover { color: #ef4444; border-color: #ef444440; }
-  .btn-edit { background: transparent; color: #d4af37; border: 1px solid #d4af3740; border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer; }
-  .btn-edit:hover { background: #d4af3720; }
+  .btn-edit { background: transparent; color: var(--brand); border: 1px solid var(--brand-dark); border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer; }
+  .btn-edit:hover { background: var(--brand-light); }
   .input { background: #0f0f13; border: 1px solid #1e1e2e; border-radius: 8px; color: #e8e8f0; font-size: 13px; padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.15s; box-sizing: border-box; }
-  .input:focus { border-color: #4b3121; }
+  .input:focus { border-color: var(--brand); }
   .overlay { position: fixed; inset: 0; background: #000000aa; display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
   .upload-area { border: 2px dashed #1e1e2e; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.15s; }
-  .upload-area:hover { border-color: #4b3121; }
+  .upload-area:hover { border-color: var(--brand); }
 `;
 
 const toBase64 = (file: File): Promise<string> =>

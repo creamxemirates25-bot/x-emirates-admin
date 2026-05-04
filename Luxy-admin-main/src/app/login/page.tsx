@@ -47,7 +47,7 @@ export default function LoginPage() {
       });
 
       console.log("Response status:", res.status);
-      
+
       if (!res.ok) {
         const data = await res.json();
         console.error("Login error response:", data);
@@ -91,7 +91,7 @@ export default function LoginPage() {
         maxWidth: "400px"
       }}>
         <h1 style={{ color: "#fff", marginBottom: "24px", fontFamily: "'Syne', sans-serif", fontSize: "24px", textAlign: "center" }}>
-          GRACIO ADMIN
+          X EMIRATES ADMIN
         </h1>
 
         {error && (
@@ -146,7 +146,7 @@ export default function LoginPage() {
             disabled={loading}
             style={{
               padding: "14px",
-              background: "#4b3121",
+              background: "var(--brand)",
               color: "#fff",
               border: "none",
               borderRadius: "8px",

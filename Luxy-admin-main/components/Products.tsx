@@ -45,22 +45,22 @@ const token = () => localStorage.getItem("token") || "";
 
 /* ─── Main Component ─────────────────────────────────── */
 export default function Products() {
-  const [products, setProducts]     = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [subcategories, setSubcategories] = useState<Subcategory[]>([]);
   const [filteredSubs, setFilteredSubs] = useState<Subcategory[]>([]);
-  const [search, setSearch]         = useState("");
-  const [showModal, setShowModal]   = useState(false);
-  const [editId, setEditId]         = useState<string | null>(null);
-  const [error, setError]           = useState("");
-  const [saving, setSaving]         = useState(false);
+  const [search, setSearch] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
 
   // form state
-  const [name, setName]             = useState("");
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subcategoryId, setSubcategoryId] = useState("");
-  const [variants, setVariants]     = useState<Variant[]>([{ ...BLANK_VARIANT(), isDefault: true }]);
+  const [variants, setVariants] = useState<Variant[]>([{ ...BLANK_VARIANT(), isDefault: true }]);
   const api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
   const fetchProducts = useCallback(async () => {
@@ -178,19 +178,19 @@ export default function Products() {
       name, description,
       category: categoryId || undefined,
       subcategory: subcategoryId || undefined,
-        variants: variants.map(v => {
-          const vPrice = Number(v.price) || (v.sizes.length > 0 ? Number(v.sizes[0].price) : 0);
-          return {
-            ...v,
-            price: vPrice,
-            stock: Number(v.stock),
-            sizes: v.sizes.map(s => ({
-              ...s,
-              price: Number(s.price) || vPrice,
-              stock: Number(s.stock)
-            }))
-          };
-        }),
+      variants: variants.map(v => {
+        const vPrice = Number(v.price) || (v.sizes.length > 0 ? Number(v.sizes[0].price) : 0);
+        return {
+          ...v,
+          price: vPrice,
+          stock: Number(v.stock),
+          sizes: v.sizes.map(s => ({
+            ...s,
+            price: Number(s.price) || vPrice,
+            stock: Number(s.stock)
+          }))
+        };
+      }),
     };
 
     try {
@@ -229,9 +229,9 @@ export default function Products() {
     setDescription(p.description);
     setCategoryId(p.category?._id || "");
     setSubcategoryId(p.subcategory?._id || "");
-    setVariants(p.variants.map(v => ({ 
-      ...v, 
-      price: String(v.price), 
+    setVariants(p.variants.map(v => ({
+      ...v,
+      price: String(v.price),
       stock: String(v.stock),
       sizes: v.sizes.map(s => ({ ...s, price: String(s.price), stock: String(s.stock) }))
     })));
@@ -255,18 +255,18 @@ export default function Products() {
     <div style={{ width: "100%", maxWidth: "100%" }}>
       <style>{`
         .card{background:#13131a;border:1px solid #1e1e2e;border-radius:12px;}
-        .btn-primary{background:#4b3121;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;}
-        .btn-primary:hover{background:#321f14;}
+        .btn-primary{background:var(--brand);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;}
+        .btn-primary:hover{background:var(--brand-dark);}
         .btn-primary:disabled{opacity:.5;cursor:not-allowed;}
         .btn-ghost{background:transparent;color:#555570;border:1px solid #1e1e2e;border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;}
         .btn-ghost:hover{color:#ef4444;border-color:#ef444440;}
-        .btn-sm{background:#1e1e2e;color:#d4af37;border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;}
+        .btn-sm{background:#1e1e2e;color:var(--brand);border:none;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;}
         .btn-sm:hover{background:#2a2a40;}
         .input{background:#0f0f13;border:1px solid #1e1e2e;border-radius:8px;color:#e8e8f0;padding:10px;width:100%;box-sizing:border-box;font-size:13px;outline:none;}
-        .input:focus{border-color:#4b3121;}
+        .input:focus{border-color:var(--brand);}
         .overlay{position:fixed;inset:0;background:#000000bb;display:flex;align-items:center;justify-content:center;z-index:100;}
         .variant-card{background:#0f0f13;border:1px solid #1e1e2e;border-radius:10px;padding:16px;position:relative;}
-        .variant-card.default{border-color:#4b3121;}
+        .variant-card.default{border-color:var(--brand);}
         .err{color:#ef4444;font-size:12px;margin-bottom:12px;background:#ef444415;padding:8px 12px;border-radius:6px;}
         .trow td{padding:14px 20px;border-bottom:1px solid #1a1a26;color:#e8e8f0;font-size:13px;}
         .color-dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:6px;border:1px solid #ffffff30;}
@@ -336,14 +336,14 @@ export default function Products() {
                       </div>
                     </div>
                   </td>
-                  <td style={{ color: "#d4af37", fontSize: 12 }}>{p.category?.name || "—"}</td>
+                  <td style={{ color: "var(--brand)", fontSize: 12 }}>{p.category?.name || "—"}</td>
                   <td>
                     <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
                       {p.variants?.map(v => (
                         <span key={v._id} title={v.color} style={{
                           display: "inline-flex", alignItems: "center", gap: 4,
                           background: "#1e1e2e", borderRadius: 20, padding: "2px 8px", fontSize: 11, color: "#e8e8f0",
-                          border: v.isDefault ? "1px solid #4b3121" : "1px solid transparent"
+                           border: v.isDefault ? "1px solid var(--brand)" : "1px solid transparent"
                         }}>
                           <span className="color-dot" style={{ background: v.color }} />
                           {v.color}
@@ -440,7 +440,7 @@ export default function Products() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-      <label style={{ fontSize: 12, fontWeight: 600, color: "#d4af37" }}>{label}</label>
+      <label style={{ fontSize: 12, fontWeight: 600, color: "var(--brand)" }}>{label}</label>
       {children}
     </div>
   );
@@ -483,7 +483,7 @@ function VariantCard({
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-        <label style={{ fontSize: 12, color: "#d4af37", display: "flex", alignItems: "center", gap: 6, cursor: "pointer" }}>
+        <label style={{ fontSize: 12, color: "var(--brand)", display: "flex", alignItems: "center", gap: 6, cursor: "pointer" }}>
           <input type="checkbox" checked={variant.isDefault} onChange={() => onSetDefault(index)} />
           Default variant
         </label>
@@ -497,7 +497,7 @@ function VariantCard({
             <button className="img-remove" onClick={() => onRemoveImage(index, ii)}>×</button>
           </div>
         ))}
-        <label style={{ cursor: "pointer", background: "#1e1e2e", borderRadius: 6, padding: "6px 10px", fontSize: 11, color: "#d4af37" }}>
+        <label style={{ cursor: "pointer", background: "#1e1e2e", borderRadius: 6, padding: "6px 10px", fontSize: 11, color: "var(--brand)" }}>
           + Image
           <input type="file" accept="image/*" multiple style={{ display: "none" }} onChange={e => e.target.files && onAddImages(index, e.target.files)} />
         </label>
@@ -506,7 +506,7 @@ function VariantCard({
       {/* Sizes */}
       <div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#d4af37" }}>Quantity</span>
+          <span style={{ fontSize: 12, fontWeight: 600, color: "var(--brand)" }}>Quantity</span>
           <button className="btn-sm" onClick={() => onAddSize(index)}>+ Add Quantity</button>
         </div>
         {variant.sizes.length === 0 && (

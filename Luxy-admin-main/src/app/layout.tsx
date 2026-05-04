@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gracio Admin",
+  title: "X Emirates Admin",
   description: "Admin control center for managing products, categories, and banners",
 };
 

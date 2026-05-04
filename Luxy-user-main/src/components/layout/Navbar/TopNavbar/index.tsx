@@ -15,19 +15,19 @@ const TopNavbar = () => {
             href="/"
             className={cn([
               integralCF.className,
-              "text-2xl lg:text-[32px] mr-3 lg:mr-10",
+              "text-2xl lg:text-[32px] mr-3 lg:mr-10 text-brand",
             ])}
           >
           <Image
-            src="/images/gracio-logo.jpg"
-            alt="Gracio Logo"
+            src="/images/x-emirates-logo.svg"
+            alt="X Emirates Logo"
             width={90}
             height={90}
-            className="rounded-full"
+            className="rounded-full object-cover"
           />
           </Link>
         </div>
-        <Suspense fallback={<div className="w-full md:mr-3 lg:mr-10 h-10 bg-[#fdf5e6] rounded-full animate-pulse" />}>
+        <Suspense fallback={<div className="w-full md:mr-3 lg:mr-10 h-10 bg-brand-light rounded-full animate-pulse" />}>
           <SearchInput />
         </Suspense>
         <div className="flex items-center">

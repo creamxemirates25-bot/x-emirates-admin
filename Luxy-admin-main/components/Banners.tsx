@@ -17,7 +17,7 @@ export default function Banners() {
   const [desktopImage, setDesktopImage] = useState("");
   const [mobileImage, setMobileImage] = useState("");
   const [loading, setLoading] = useState(false);
-  const api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'; 
+  const api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
   const fetchBanners = useCallback(async () => {
     try {
@@ -93,8 +93,8 @@ export default function Banners() {
     <div>
       <style>{`
         .card { background: #13131a; border: 1px solid #1e1e2e; border-radius: 12px; }
-        .btn-primary { background: #4b3121; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-        .btn-primary:hover { background: #321f14; }
+        .btn-primary { background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+        .btn-primary:hover { background: var(--brand-dark); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
         .btn-ghost { background: transparent; color: #555570; border: 1px solid #1e1e2e; border-radius: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer; transition: all 0.2s ease; }
         .btn-ghost:hover { color: #ef4444; border-color: #ef444440; }
@@ -103,7 +103,7 @@ export default function Banners() {
         .toggle input { opacity: 0; width: 0; height: 0; }
         .toggle-slider { position: absolute; inset: 0; background: #1e1e2e; border-radius: 22px; cursor: pointer; transition: 0.2s; }
         .toggle-slider:before { content: ''; position: absolute; height: 16px; width: 16px; left: 3px; bottom: 3px; background: #555570; border-radius: 50%; transition: 0.2s; }
-        input:checked + .toggle-slider { background: #4b3121; }
+        input:checked + .toggle-slider { background: var(--brand); }
         input:checked + .toggle-slider:before { transform: translateX(16px); background: #fff; }
       
         // .upload-box:hover { border-color: #7c3aed; }

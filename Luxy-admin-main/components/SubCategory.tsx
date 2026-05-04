@@ -135,12 +135,12 @@ export default function Categories() {
       <style>{`
         .card { background: #13131a; border: 1px solid #1e1e2e; border-radius: 12px; transition: border-color 0.18s; }
         .card:hover { border-color: #2a2a40; }
-        .btn-primary { background: #4b3121; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
-        .btn-primary:hover { background: #321f14; }
+        .btn-primary { background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+        .btn-primary:hover { background: var(--brand-dark); }
         .btn-ghost { background: transparent; color: #555570; border: 1px solid #1e1e2e; border-radius: 8px; padding: 8px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer; transition: all 0.15s; }
         .btn-ghost:hover { color: #ef4444; border-color: #ef444440; }
         .input { background: #0f0f13; border: 1px solid #1e1e2e; border-radius: 8px; color: #e8e8f0; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 10px 14px; width: 100%; outline: none; transition: border-color 0.15s; }
-        .input:focus { border-color: #4b3121; }
+        .input:focus { border-color: var(--brand); }
         .overlay { position: fixed; inset: 0; background: #000000aa; display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
         
         @media (max-width: 768px) {

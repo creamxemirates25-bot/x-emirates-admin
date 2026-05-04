@@ -15,7 +15,7 @@ import AddressModal from "@/components/cart-page/AddressModal";
 
 // WhatsApp configuration
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "918075306915";
-const WHATSAPP_MESSAGE = "Hi Gracio Organic! I'd like to place an order.";
+const WHATSAPP_MESSAGE = "Hi X Emirates! I'd like to place an order.";
 
 export default function CartPage() {
   const { cart, totalPrice, adjustedTotalPrice } = useAppSelector(
@@ -166,7 +166,7 @@ export default function CartPage() {
                 </div>
                 <button 
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full md:w-auto shrink-0 bg-[#fdf5e6] text-brand border border-brand/10 font-bold px-6 py-2.5 rounded-full hover:bg-brand hover:text-white transition-all active:scale-[0.98] text-xs"
+                  className="w-full md:w-auto shrink-0 bg-brand-light text-brand border border-brand/10 font-bold px-6 py-2.5 rounded-full hover:bg-brand hover:text-white transition-all active:scale-[0.98] text-xs"
                 >
                   {isAddressFilled ? "Change" : "Add Address"}
                 </button>
