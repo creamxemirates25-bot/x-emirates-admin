@@ -489,18 +489,82 @@ function VariantCard({
         </label>
       </div>
 
-      {/* Images */}
-      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 10 }}>
-        {variant.images.map((src, ii) => (
-          <div key={ii} style={{ position: "relative" }}>
-            <Image src={src} className="img-thumb" alt={`variant-${index}-img-${ii}`} width={40} height={40} style={{ objectFit: "cover" }} />
-            <button className="img-remove" onClick={() => onRemoveImage(index, ii)}>×</button>
-          </div>
-        ))}
-        <label style={{ cursor: "pointer", background: "#1e1e2e", borderRadius: 6, padding: "6px 10px", fontSize: 11, color: "var(--brand)" }}>
-          + Image
-          <input type="file" accept="image/*" multiple style={{ display: "none" }} onChange={e => e.target.files && onAddImages(index, e.target.files)} />
-        </label>
+      {/* Images - Total 5 (1 Main + 4 Sub) */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 15 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: "var(--brand)" }}>
+            Product Images <span style={{ color: "#555570", fontWeight: 400 }}>({variant.images.length}/5)</span>
+          </span>
+          {variant.images.length < 5 && (
+            <label style={{ cursor: "pointer", background: "#1e1e2e", borderRadius: 6, padding: "6px 12px", fontSize: 11, color: "var(--brand)", border: "1px solid var(--brand-dark)" }}>
+              + Add {variant.images.length === 0 ? "Main" : "Sub"} Image
+              <input 
+                type="file" 
+                accept="image/*" 
+                multiple={5 - variant.images.length > 1} 
+                style={{ display: "none" }} 
+                onChange={e => {
+                  if (e.target.files) {
+                    const remaining = 5 - variant.images.length;
+                    const filesToLoad = Array.from(e.target.files).slice(0, remaining);
+                    const dt = new DataTransfer();
+                    filesToLoad.forEach(f => dt.items.add(f));
+                    onAddImages(index, dt.files);
+                  }
+                }} 
+              />
+            </label>
+          )}
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10 }}>
+          {[0, 1, 2, 3, 4].map((i) => {
+            const src = variant.images[i];
+            const isMain = i === 0;
+            
+            return (
+              <div key={i} style={{ 
+                position: "relative", 
+                aspectRatio: "1/1", 
+                background: "#0a0a0f", 
+                borderRadius: 8, 
+                border: src ? "1px solid #1e1e2e" : "1px dashed #1e1e2e",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden"
+              }}>
+                {src ? (
+                  <>
+                    <Image src={src} alt={`img-${i}`} fill style={{ objectFit: "cover" }} />
+                    <button className="img-remove" onClick={() => onRemoveImage(index, i)} style={{ zIndex: 2 }}>×</button>
+                    <div style={{ 
+                      position: "absolute", 
+                      bottom: 0, 
+                      left: 0, 
+                      right: 0, 
+                      background: isMain ? "var(--brand)" : "rgba(0,0,0,0.7)", 
+                      color: "#fff", 
+                      fontSize: "9px", 
+                      textAlign: "center", 
+                      padding: "2px 0",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em"
+                    }}>
+                      {isMain ? "MAIN" : `SUB ${i}`}
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ color: "#2a2a38", fontSize: 10, fontWeight: 600 }}>
+                    {isMain ? "MAIN" : `SUB ${i}`}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Sizes */}

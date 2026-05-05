@@ -1,10 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { integralCF } from "@/styles/fonts";
+import { Montserrat } from "next/font/google";
 import TopNavbar from "@/components/layout/Navbar/TopNavbar";
 import Footer from "@/components/layout/Footer";
 import HolyLoader from "holy-loader";
 import Providers from "./providers";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Cream X Emirates",
@@ -22,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${integralCF.variable} font-sans flex flex-col min-h-screen`}>
+      <body className={`${montserrat.variable} ${integralCF.variable} font-sans flex flex-col min-h-screen`}>
         <HolyLoader color="#db2777" />
         <Providers>
           {/* Navbar */}

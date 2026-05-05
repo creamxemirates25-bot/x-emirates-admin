@@ -7,6 +7,7 @@ type Category = { _id: string; name: string; image?: string };
 const CSS = `
   .card { background: #13131a; border: 1px solid #1e1e2e; border-radius: 12px; transition: border-color 0.18s; }
   .card:hover { border-color: #2a2a40; }
+  .active-card { border-color: var(--brand) !important; box-shadow: 0 0 15px rgba(219, 39, 119, 0.1); }
   .btn-primary { background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
   .btn-primary:hover:not(:disabled) { background: var(--brand-dark); }
   .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -39,6 +40,9 @@ export default function Categories() {
   const api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
   const token = () => localStorage.getItem("token") || "";
 
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Record<string, any[]>>({});
+
   const fetchCategories = useCallback(async () => {
     try {
       const res = await fetch(`${api}/category`);
@@ -46,6 +50,26 @@ export default function Categories() {
       if (data.categories) setCategories(data.categories);
     } catch (e) { console.error(e); }
   }, [api]);
+
+  const fetchRelatedProducts = async (catId: string) => {
+    if (relatedProducts[catId]) return;
+    try {
+      const res = await fetch(`${api}/product?category=${catId}`);
+      const data = await res.json();
+      if (data.products) {
+        setRelatedProducts(prev => ({ ...prev, [catId]: data.products.slice(0, 2) }));
+      }
+    } catch (e) { console.error(e); }
+  };
+
+  const handleCategoryClick = (id: string) => {
+    if (expandedId === id) {
+      setExpandedId(null);
+    } else {
+      setExpandedId(id);
+      fetchRelatedProducts(id);
+    }
+  };
 
   useEffect(() => { fetchCategories(); }, [fetchCategories]);
 
@@ -154,7 +178,12 @@ export default function Categories() {
           <p style={{ color: "#44445a", fontSize: 13 }}>No categories yet.</p>
         )}
         {categories.map(cat => (
-          <div key={cat._id} className="card" style={{ padding: 20 }}>
+          <div 
+            key={cat._id} 
+            className={`card${expandedId === cat._id ? " active-card" : ""}`} 
+            style={{ padding: 20, cursor: "pointer", position: "relative" }}
+            onClick={() => handleCategoryClick(cat._id)}
+          >
             {cat.image && (
               <div style={{ marginBottom: 12, borderRadius: 8, overflow: "hidden", height: 100, position: "relative", background: "#0f0f13" }}>
                 <Image src={cat.image} alt={cat.name} fill style={{ objectFit: "cover" }} unoptimized />
@@ -162,10 +191,45 @@ export default function Categories() {
             )}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
               <div style={{ fontWeight: 600, fontSize: 14, color: "#e8e8f0", wordBreak: "break-word" }}>{cat.name}</div>
-              <button className="btn-ghost" onClick={() => remove(cat._id)}>x</button>
+              <button 
+                className="btn-ghost" 
+                onClick={(e) => { e.stopPropagation(); remove(cat._id); }}
+                style={{ padding: "2px 8px" }}
+              >x</button>
             </div>
-            <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid #1e1e2e" }}>
-              <button className="btn-edit" onClick={() => openEdit(cat)}>Edit</button>
+
+            {expandedId === cat._id && (
+              <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #1e1e2e" }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "var(--brand)", marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  Related Products
+                </div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  {relatedProducts[cat._id]?.length > 0 ? (
+                    relatedProducts[cat._id].map((p, idx) => {
+                      const img = p.variants?.find((v: any) => v.isDefault)?.images?.[0] || p.variants?.[0]?.images?.[0];
+                      return (
+                        <div key={idx} style={{ flex: 1, position: "relative", aspectRatio: "1/1", borderRadius: 6, overflow: "hidden", background: "#0a0a0f", border: "1px solid #1e1e2e" }}>
+                          {img ? (
+                            <Image src={img} alt={p.name} fill style={{ objectFit: "cover" }} />
+                          ) : (
+                            <div style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>📦</div>
+                          )}
+                          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "rgba(0,0,0,0.6)", color: "#fff", fontSize: 8, padding: "2px 4px", textAlign: "center" }}>
+                            {p.name.slice(0, 10)}...
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div style={{ fontSize: 11, color: "#44445a" }}>No products found</div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid #1e1e2e", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <button className="btn-edit" onClick={(e) => { e.stopPropagation(); openEdit(cat); }}>Edit</button>
+              <div style={{ fontSize: 10, color: "#44445a" }}>{expandedId === cat._id ? "Collapse" : "Click to view products"}</div>
             </div>
           </div>
         ))}
