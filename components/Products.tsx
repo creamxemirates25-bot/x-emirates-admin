@@ -135,7 +135,7 @@ export default function Products() {
         try {
           const res = await fetchWithAuth(`${api}/product/image/delete`, {
             method: "POST",
-            body: { url: src },
+            body: JSON.stringify({ url: src }),
           });
           if (!res.ok) {
             console.warn('Failed to delete remote image');
@@ -223,7 +223,7 @@ export default function Products() {
         : `${api}/product/add`;
       const method = editId ? "PUT" : "POST";
 
-      const res = await fetchWithAuth(url, { method, body: payload });
+      const res = await fetchWithAuth(url, { method, body: JSON.stringify(payload) });
       const data = await res.json();
       if (!res.ok) { setError(data.error || "Failed"); return; }
 

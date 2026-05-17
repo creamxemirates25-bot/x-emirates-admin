@@ -68,14 +68,14 @@ export default function Banners() {
     try {
       const res = await fetchWithAuth(`${api}/banner/add`, {
         method: "POST",
-        body: {
+        body: JSON.stringify({
           desktopImage,
           mobileImage,
           desktopFit,
           desktopPosition,
           mobileFit,
           mobilePosition,
-        },
+        }),
       });
       if (res.ok) {
         const data = await res.json();

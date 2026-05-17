@@ -106,7 +106,7 @@ export default function Categories() {
         }
         const res = await fetchWithAuth(`${api}/category/${editId}`, {
           method: "PUT",
-          body: { category: updatePayload },
+          body: JSON.stringify({ category: updatePayload }),
         });
         const data = await res.json();
         if (data.success) {
@@ -124,12 +124,12 @@ export default function Categories() {
       } else {
         const res = await fetchWithAuth(`${api}/category/add`, {
           method: "POST",
-          body: {
+          body: JSON.stringify({
             name,
             description: "Added from Admin",
             isActive: true,
             image: imagePreview || undefined,
-          },
+          }),
         });
         const data = await res.json();
         if (data.success) {
@@ -275,7 +275,7 @@ export default function Categories() {
                         try {
                           const res = await fetchWithAuth(`${api}/product/image/delete`, {
                             method: "POST",
-                            body: { url: imagePreview },
+                            body: JSON.stringify({ url: imagePreview }),
                           });
                           if (!res.ok) console.warn('Failed to delete image on server');
                         } catch (e) {
