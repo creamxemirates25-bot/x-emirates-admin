@@ -117,9 +117,33 @@ export default function Products() {
 
   const addImages = async (i: number, files: FileList) => {
     const b64s = await Promise.all(Array.from(files).map(toBase64));
-    setVariants(prev => prev.map((v, idx) =>
-      idx === i ? { ...v, images: [...v.images, ...b64s] } : v
-    ));
+    
+    setSaving(true); // Disable save button during upload
+    const uploadedUrls: string[] = [];
+    for (const b64 of b64s) {
+      try {
+        const res = await fetchWithAuth(`${api}/product/image/upload`, {
+          method: "POST",
+          body: JSON.stringify({ image: b64 }),
+        });
+        const data = await res.json();
+        if (res.ok && data.imageUrl) {
+          uploadedUrls.push(data.imageUrl);
+        } else {
+          setError(data.error || "Failed to upload image.");
+        }
+      } catch (e) {
+        console.error(e);
+        setError("Network error while uploading image.");
+      }
+    }
+    setSaving(false);
+
+    if (uploadedUrls.length > 0) {
+      setVariants(prev => prev.map((v, idx) =>
+        idx === i ? { ...v, images: [...v.images, ...uploadedUrls] } : v
+      ));
+    }
   };
 
   const removeImage = (vi: number, ii: number) => {
@@ -347,7 +371,7 @@ export default function Products() {
                   <td>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       {def?.images?.[0]
-                        ? <Image src={def.images[0]} className="img-thumb" alt={p.name} width={40} height={40} style={{ objectFit: "cover" }} />
+                        ? <Image src={def.images[0]} className="img-thumb" alt={p.name} width={40} height={40} style={{ objectFit: "cover" }} unoptimized />
                         : <div style={{ width: 40, height: 40, borderRadius: 6, background: "#1e1e2e", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📦</div>
                       }
                       <div>
@@ -557,7 +581,7 @@ function VariantCard({
               }}>
                 {src ? (
                   <>
-                    <Image src={src} alt={`img-${i}`} fill style={{ objectFit: "cover" }} />
+                    <Image src={src} alt={`img-${i}`} fill style={{ objectFit: "cover" }} unoptimized />
                     <button className="img-remove" onClick={() => onRemoveImage(index, i)} style={{ zIndex: 2 }}>×</button>
                     <div style={{ 
                       position: "absolute", 
