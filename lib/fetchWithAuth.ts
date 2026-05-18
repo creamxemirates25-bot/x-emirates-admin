@@ -4,10 +4,12 @@ export async function fetchWithAuth(input: RequestInfo, init: RequestInit = {}) 
     const headers = new Headers(init.headers || {});
     if (auth) headers.set('Authorization', auth);
 
-    // If body is a plain object (not FormData), stringify and set JSON header
+    // If body is an object, stringify it. If it's a string (likely JSON), ensure JSON header.
     let body = init.body;
-    if (body && typeof body === 'object' && !(body instanceof FormData)) {
-      try { body = JSON.stringify(body); } catch (e) { /* leave as-is */ }
+    if (body && !(body instanceof FormData)) {
+      if (typeof body === 'object') {
+        try { body = JSON.stringify(body); } catch (e) { /* leave as-is */ }
+      }
       if (!headers.get('Content-Type')) headers.set('Content-Type', 'application/json');
     }
 
