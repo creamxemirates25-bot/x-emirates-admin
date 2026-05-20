@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, ReactNode } from "react";
+import { fetchWithAuth } from "../../../lib/fetchWithAuth";
 
 type SubCategory = { _id: string; name: string };
 type FieldProps = { label: string; children: ReactNode };
@@ -16,7 +17,7 @@ export default function Subcategories() {
   const fetchSubcategories = useCallback(async () => {
     try {
       console.log("Fetching from:", `${api}/subcategory`);
-      const res = await fetch(`${api}/subcategory`);
+      const res = await fetchWithAuth(`${api}/subcategory`);
       console.log("Response status:", res.status);
       console.log("Response headers:", res.headers.get("content-type"));
       const text = await res.text();
@@ -40,20 +41,20 @@ export default function Subcategories() {
     if (!name.trim()) return alert("Name is required.");
     setSaving(true);
     try {
-      const authToken = localStorage.getItem("token") || "";
       const res = editId
-        ? await fetch(`${api}/subcategory/${editId}`, {
+        ? await fetchWithAuth(`${api}/subcategory/${editId}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json", Authorization: authToken },
           body: JSON.stringify({ name }),
         })
-        : await fetch(`${api}/subcategory/add`, {
+        : await fetchWithAuth(`${api}/subcategory/add`, {
           method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: authToken },
           body: JSON.stringify({ name }),
         });
 
-      if (!res.ok) return alert(`Error: ${await res.text()}`);
+      if (!res.ok) {
+        const text = await res.text();
+        return alert(`Error: ${text}`);
+      }
       const data = await res.json();
 
       if (data.success) {
@@ -75,10 +76,8 @@ export default function Subcategories() {
   const remove = async (id: string) => {
     if (!confirm("Delete this subcategory?")) return;
     try {
-      const authToken = localStorage.getItem("token") || "";
-      const res = await fetch(`${api}/subcategory/delete/${id}`, {
+      const res = await fetchWithAuth(`${api}/subcategory/delete/${id}`, {
         method: "DELETE",
-        headers: { Authorization: authToken },
       });
       const data = await res.json();
       if (data.success) setSubcategories(prev => prev.filter(s => s._id !== id));
