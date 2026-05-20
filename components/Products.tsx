@@ -431,7 +431,42 @@ export default function Products() {
             {/* Base fields */}
             <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
               <Field label="Product Name">
-                <input className="input" value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Floral Dress" />
+                <input 
+                  className="input" 
+                  value={name} 
+                  onChange={e => {
+                    const newName = e.target.value;
+                    setName(newName);
+                    
+                    // 1. Auto-fill Flavour to "Default" for the first variant if it's empty
+                    setVariants(prev => prev.map((v, idx) => {
+                      if (idx === 0 && !v.color.trim()) {
+                        return { ...v, color: "Default" };
+                      }
+                      return v;
+                    }));
+
+                    // 2. Auto-detect quantity/size from product name (e.g. 100g, 50ml, 250g)
+                    const matchSize = newName.match(/\b(\d+(?:\s*(?:g|ml|kg|l|oz|pcs|pieces)))\b/i);
+                    if (matchSize && matchSize[1]) {
+                      const detectedSize = matchSize[1].trim();
+                      setVariants(prev => prev.map((v, idx) => {
+                        if (idx === 0) {
+                          // If there are no sizes/quantities defined yet, add one
+                          if (v.sizes.length === 0) {
+                            return { ...v, sizes: [{ size: detectedSize, stock: "0", price: "" }] };
+                          } 
+                          // If there is only one empty size, fill it
+                          else if (v.sizes.length === 1 && !v.sizes[0].size.trim()) {
+                            return { ...v, sizes: [{ size: detectedSize, stock: v.sizes[0].stock, price: v.sizes[0].price }] };
+                          }
+                        }
+                        return v;
+                      }));
+                    }
+                  }}
+                  placeholder="e.g. Face Cream 100g" 
+                />
               </Field>
               <Field label="Description">
                 <textarea className="input" value={description} rows={3} onChange={e => setDescription(e.target.value)} placeholder="Product description" style={{ resize: "vertical" }} />
