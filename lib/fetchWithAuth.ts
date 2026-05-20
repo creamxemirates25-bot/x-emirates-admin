@@ -24,7 +24,7 @@ export async function fetchWithAuth(input: RequestInfo, init: RequestInit = {}) 
       try { localStorage.removeItem('token'); } catch {}
       alert(msg);
       // redirect to admin login (Next.js app route)
-      if (typeof window !== 'undefined') window.location.href = '/admin/login';
+      if (typeof window !== 'undefined') window.location.href = '/login';
     }
 
     return res;

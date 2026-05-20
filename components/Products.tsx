@@ -288,8 +288,18 @@ export default function Products() {
     if (!confirm("Delete this product?")) return;
     const authToken = token();
     if (!authToken) { alert('Not logged in — please sign in to perform this action.'); return; }
-    const res = await fetchWithAuth(`${api}/product/delete/${id}`, { method: "DELETE" });
-    if (res.ok) setProducts(prev => prev.filter(p => p._id !== id));
+    try {
+      const res = await fetchWithAuth(`${api}/product/delete/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setProducts(prev => prev.filter(p => p._id !== id));
+      } else {
+        alert(data.error || "Failed to delete product.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete product due to network error.");
+    }
   };
 
   const filtered = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
