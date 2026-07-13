@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, ReactNode } from "react";
-import { fetchWithAuth } from "../../../lib/fetchWithAuth";
+import { fetchWithAuth } from "../../../../lib/fetchWithAuth";
 
 type SubCategory = { _id: string; name: string };
 type FieldProps = { label: string; children: ReactNode };
