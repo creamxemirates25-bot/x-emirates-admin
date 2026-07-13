@@ -1,0 +1,12 @@
+[submodule "emirates-admin-main"]
+	path = emirates-admin-main
+	url = https://github.com/shareefcr7/x-emirates-admin.git
+	branch = main
+[submodule "emirates-backend-main"]
+	path = emirates-backend-main
+	url = https://github.com/creamxemirates25-bot/x-emirates-backend.git
+	branch = main
+[submodule "emirates-user-main"]
+	path = emirates-user-main
+	url = https://github.com/creamxemirates25-bot/x-emirates-frontend.git
+	branch = company
