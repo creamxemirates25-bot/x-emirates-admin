@@ -183,7 +183,7 @@ export default function Categories() {
           >
             {cat.image && (
               <div style={{ marginBottom: 12, borderRadius: 8, overflow: "hidden", height: 100, position: "relative", background: "#0f0f13" }}>
-                <Image src={cat.image} alt={cat.name} fill style={{ objectFit: "cover" }} unoptimized />
+                <Image src={cat.image} alt={cat.name} fill style={{ objectFit: "contain" }} unoptimized />
               </div>
             )}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
@@ -255,7 +255,7 @@ export default function Categories() {
                 <label className="upload-area" style={{ display: "block" }}>
                   {imagePreview ? (
                     <div style={{ position: "relative", height: 120, borderRadius: 6, overflow: "hidden" }}>
-                      <Image src={imagePreview} alt="preview" fill style={{ objectFit: "cover" }} unoptimized />
+                      <Image src={imagePreview} alt="preview" fill style={{ objectFit: "contain" }} unoptimized />
                       <div style={{ position: "absolute", inset: 0, background: "#00000060", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <span style={{ color: "#fff", fontSize: 12 }}>Click to change</span>
                       </div>
